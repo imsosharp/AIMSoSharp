@@ -15,18 +15,25 @@ namespace AIM.Autoplay.Util
     {
         public void ExecuteMixedMode(Vector3 pos)
         {
-            WalkAround(pos);
-            if (!CanLastHit())
+            var spellbook = ObjectManager.Player.Spellbook;
+            if (!spellbook.IsChanneling && !spellbook.IsAutoAttacking && !spellbook.IsCharging &&
+                !spellbook.IsCastingSpell)
             {
-                Obj_AI_Hero target = TargetSelector.GetTarget(Heroes.Me.AttackRange, TargetSelector.DamageType.Physical);
-                if (target != null && target.IsValid && !target.IsDead && State.IsBotSafe() && !target.UnderTurret(true) && !Variables.OverrideAttackUnitAction)
+                WalkAround(pos);
+                if (!CanLastHit())
                 {
-                    Heroes.Me.IssueOrder(GameObjectOrder.AttackUnit, target);
+                    Obj_AI_Hero target = TargetSelector.GetTarget(
+                        Heroes.Me.AttackRange, TargetSelector.DamageType.Physical);
+                    if (target != null && target.IsValid && !target.IsDead && State.IsBotSafe() &&
+                        !target.UnderTurret(true) && !Variables.OverrideAttackUnitAction)
+                    {
+                        Heroes.Me.IssueOrder(GameObjectOrder.AttackUnit, target);
+                    }
                 }
-            }
-            else
-            {
-                LastHit();
+                else
+                {
+                    LastHit();
+                }
             }
         }
 
