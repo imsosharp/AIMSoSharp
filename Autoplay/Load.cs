@@ -25,8 +25,8 @@ namespace AIM.Autoplay
         }
         public static void OnGameLoad(EventArgs args)
         {
-            var activateIt = new Modes.Carry();
-            activateIt.Init();
+            var newCarryInstance = new Modes.Carry();
+            newCarryInstance.Init();
         }
     }
 }
