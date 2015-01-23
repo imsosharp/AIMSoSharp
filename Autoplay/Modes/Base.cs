@@ -15,7 +15,7 @@ using AutoLevel = LeagueSharp.Common.AutoLevel;
 
 namespace AIM.Autoplay.Modes
 {
-    internal class Base
+    internal abstract class Base
     {
         public Constants ObjConstants { get; protected set; }
         public Heroes ObjHeroes { get; protected set; }
@@ -23,7 +23,7 @@ namespace AIM.Autoplay.Modes
         public Turrets ObjTurrets { get; protected set; }
         public Autoplay.Util.Orbwalker OrbW { get; set; }
         public virtual void OnGameLoad(EventArgs args) { }
-        public virtual void OGU(EventArgs args) { }
+        public virtual void OnGameUpdate(EventArgs args) { }
 
         #region Menu
         public Menu Menu;

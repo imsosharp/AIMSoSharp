@@ -28,7 +28,7 @@ namespace AIM.Autoplay.Modes
         public override void OnGameLoad(EventArgs args)
         {
             //LoadMenu();
-
+            
             Game.PrintChat("AIM Loaded!");
             new AutoLevel(Util.Data.AutoLevel.GetSequence());
             ObjConstants.AssignConstants();
