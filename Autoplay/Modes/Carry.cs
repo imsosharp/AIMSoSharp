@@ -36,6 +36,7 @@ namespace AIM.Autoplay.Modes
             ObjMinions = new Minions();
             ObjTurrets = new Turrets();
             OrbW = new Autoplay.Util.Orbwalker();
+            Game.PrintChat("AIM Loaded!");
         }
 
         public override void OnGameUpdate(EventArgs args)
@@ -94,7 +95,7 @@ namespace AIM.Autoplay.Modes
                         }
                         return BehaviorState.Failure;
                     }
-                    catch (Exception e)
+                    catch (NullReferenceException e)
                     {
                         Console.WriteLine(e);
                     }
