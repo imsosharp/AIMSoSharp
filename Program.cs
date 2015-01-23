@@ -42,7 +42,7 @@ namespace AIM
                 Helpers.UpdateCheck();
                 try
                 {
-                    var type = Type.GetType("Support.Plugins." + ObjectManager.Player.ChampionName);
+                    var type = Type.GetType("AIM.Plugins." + ObjectManager.Player.ChampionName);
 
                     if (type != null)
                     {
@@ -50,7 +50,7 @@ namespace AIM
                         Activator.CreateInstance(type);
                         return;
                     }
-                        type = Type.GetType("Support.Plugins.Default");
+                        type = Type.GetType("AIM.Plugins.Default");
                     if (type != null)
                     {
                         Protector.Init();
