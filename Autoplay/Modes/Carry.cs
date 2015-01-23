@@ -21,13 +21,13 @@ namespace AIM.Autoplay.Modes
     {
         public Carry()
         {
-            //Game.OnGameUpdate += OnGameUpdate;
+            Game.OnGameUpdate += OnGameUpdate;
             CustomEvents.Game.OnGameLoad += OnGameLoad;
         }
 
         public override void OnGameLoad(EventArgs args)
         {
-            //LoadMenu();
+            LoadMenu();
             try
             {
                 Game.PrintChat("AIM Loaded!");
