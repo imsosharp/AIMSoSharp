@@ -28,16 +28,23 @@ namespace AIM.Autoplay.Modes
         public override void OnGameLoad(EventArgs args)
         {
             //LoadMenu();
-            
-            Game.PrintChat("AIM Loaded!");
-            new AutoLevel(Util.Data.AutoLevel.GetSequence());
-            ObjConstants.AssignConstants();
-            ObjHeroes.CreateHeroesList();
-            ObjConstants = new Constants();
-            ObjHeroes = new Heroes();
-            ObjMinions = new Minions();
-            ObjTurrets = new Turrets();
-            OrbW = new Autoplay.Util.Orbwalker();
+            try
+            {
+                Game.PrintChat("AIM Loaded!");
+                Console.WriteLine("FUGG :D");
+                new AutoLevel(Util.Data.AutoLevel.GetSequence());
+                ObjConstants.AssignConstants();
+                ObjHeroes.CreateHeroesList();
+                ObjConstants = new Constants();
+                ObjHeroes = new Heroes();
+                ObjMinions = new Minions();
+                ObjTurrets = new Turrets();
+                OrbW = new Autoplay.Util.Orbwalker();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         public override void OnGameUpdate(EventArgs args)

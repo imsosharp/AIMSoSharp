@@ -22,12 +22,20 @@ namespace AIM.Autoplay
         public static void OnWndProc(EventArgs args)
         {
             //Draw AIMLoading.jpg
+            Console.WriteLine("Loading");
         }
         public static void OnGameLoad(EventArgs args)
         {
             if (Utility.Map.GetMap().Type == Utility.Map.MapType.HowlingAbyss)
             {
-                new Modes.Carry();
+                try
+                {
+                    new Modes.Carry();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
     }
