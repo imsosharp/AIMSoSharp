@@ -17,32 +17,12 @@ namespace AIM.Autoplay.Modes
 {
     internal class Base
     {
-        public Constants ObjConstants { get; private set; }
-        public Heroes ObjHeroes { get; private set; }
-        public Minions ObjMinions { get; private set; }
-        public Turrets ObjTurrets { get; private set; }
+        public Constants ObjConstants { get; protected set; }
+        public Heroes ObjHeroes { get; protected set; }
+        public Minions ObjMinions { get; protected set; }
+        public Turrets ObjTurrets { get; protected set; }
         public Autoplay.Util.Orbwalker OrbW { get; set; }
-
-
-
-        public virtual void OnGameLoad(EventArgs args)
-        {
-            new AutoLevel(Util.Data.AutoLevel.GetSequence());
-            ObjConstants.AssignConstants();
-            ObjHeroes.CreateHeroesList();
-            ObjConstants = new Constants();
-            ObjHeroes = new Heroes();
-            ObjMinions = new Minions();
-            ObjTurrets = new Turrets();
-            OrbW = new Autoplay.Util.Orbwalker();
-        }
-
-        public virtual void OnGameUpdate(EventArgs args)
-        {
-            ObjHeroes.SortHeroesListByDistance();
-            ObjMinions.UpdateMinions();
-            ObjTurrets.UpdateTurrets();
-        }
-
+        public virtual void OnGameLoad(EventArgs args) { }
+        public virtual void OnGameUpdate(EventArgs args) { }
     }
 }

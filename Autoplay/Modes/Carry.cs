@@ -12,6 +12,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using AIM.Autoplay.Util.Helpers;
 using AIM.Autoplay.Util.Data;
+using AutoLevel = LeagueSharp.Common.AutoLevel;
 
 namespace AIM.Autoplay.Modes
 {
@@ -23,11 +24,26 @@ namespace AIM.Autoplay.Modes
             CustomEvents.Game.OnGameLoad += OnGameLoad;
         }
 
-        public override void OnGameLoad(EventArgs args) { }
+        public override void OnGameLoad(EventArgs args)
+        {
+            new AutoLevel(Util.Data.AutoLevel.GetSequence());
+            ObjConstants.AssignConstants();
+            ObjHeroes.CreateHeroesList();
+            ObjConstants = new Constants();
+            ObjHeroes = new Heroes();
+            ObjMinions = new Minions();
+            ObjTurrets = new Turrets();
+            OrbW = new Autoplay.Util.Orbwalker();
+        }
 
         public override void OnGameUpdate(EventArgs args)
         {
+            ObjHeroes.SortHeroesListByDistance();
+            ObjMinions.UpdateMinions();
+            ObjTurrets.UpdateTurrets();
+
             ImpingAintEasy();
+
         }
 
         public void ImpingAintEasy()
