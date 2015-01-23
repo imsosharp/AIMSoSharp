@@ -15,7 +15,7 @@ using AutoLevel = LeagueSharp.Common.AutoLevel;
 
 namespace AIM.Autoplay.Modes
 {
-    internal abstract class Base
+    public abstract class Base
     {
         public Constants ObjConstants { get; protected set; }
         public Heroes ObjHeroes { get; protected set; }

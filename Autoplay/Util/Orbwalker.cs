@@ -11,7 +11,7 @@ using LeagueSharp.Common;
 
 namespace AIM.Autoplay.Util
 {
-    class Orbwalker
+    public class Orbwalker
     {
         public void ExecuteMixedMode(Vector3 pos)
         {
