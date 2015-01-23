@@ -23,14 +23,14 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
 #endregion
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Ryze : PluginBase
     {
@@ -58,22 +58,22 @@ namespace Support.Plugins
             
                 if (Q.CastCheck(Target, "ComboQ"))
                 {
-                    Q.CastOnUnit(Target, UsePackets);
+                    Q.CastOnUnit(Target);
                 }
 
                 if (Player.Distance(Target) >= 575 && !Target.IsFacing(Player) && W.CastCheck(Target, "ComboW"))
                 {
-                    W.CastOnUnit(Target, UsePackets);
+                    W.CastOnUnit(Target);
                 }
 
                 if (Target.IsValidTarget(W.Range) && W.CastCheck(Target, "ComboW"))
                 {
-                    W.CastOnUnit(Target, UsePackets);
+                    W.CastOnUnit(Target);
                 }
 
                 if (Target.IsValidTarget(E.Range) && W.CastCheck(Target, "ComboE"))
                 {
-                    E.CastOnUnit(Target, UsePackets);
+                    E.CastOnUnit(Target);
                 }
 
                 if (R.IsReady())

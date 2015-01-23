@@ -20,11 +20,11 @@
 using System;
 using LeagueSharp;
 using LeagueSharp.Common;
-using Support.Util;
+using AIM.Util;
 
 #endregion
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Default : PluginBase
     {

@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Fizz : PluginBase
     {
@@ -46,7 +46,7 @@ namespace Support.Plugins
             {
                 if (target.IsValidTarget(Q.Range) && Q.IsReady())
                 {
-                    Q.CastOnUnit(target, UsePackets);
+                    Q.CastOnUnit(target);
                     return;
                 }
                 //castItems(target);
@@ -56,7 +56,7 @@ namespace Support.Plugins
                 }
                 if (target.IsValidTarget(Orbwalking.GetRealAutoAttackRange(Player)) && W.IsReady())
                 {
-                    W.CastOnUnit(Player, UsePackets);
+                    W.CastOnUnit(Player);
                     return;
                 }
                 if (target.IsValidTarget(800) && E.IsReady() && UseEAgain)

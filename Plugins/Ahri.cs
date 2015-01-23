@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Ahri : PluginBase
     {
@@ -36,7 +36,7 @@ namespace Support.Plugins
                 }
                 if (Q.CastCheck(Target, "ComboQ") && Target.HasBuffOfType(BuffType.Charm))
                 {
-                    Q.Cast(Target, UsePackets);
+                    Q.Cast(Target);
                 }
                 if (Q.CastCheck(Target, "ComboQ"))
                 {
@@ -48,7 +48,7 @@ namespace Support.Plugins
                 }
                 if (R.IsReady() && (R.IsKillable(Target) || IsRActive()))
                 {
-                    R.Cast(Target, UsePackets);
+                    R.Cast(Target);
                 }           
             }
 

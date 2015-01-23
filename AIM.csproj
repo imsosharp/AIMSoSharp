@@ -7,8 +7,8 @@
     <ProjectGuid>{8F5D0C5E-5809-412A-BCDE-747A5521110A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AutoSharpporting</RootNamespace>
-    <AssemblyName>AutoSharpporting</AssemblyName>
+    <RootNamespace>AIM</RootNamespace>
+    <AssemblyName>AIM</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PreBuildEvent />
@@ -56,28 +56,42 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BehaviorSharp">
+      <HintPath>..\..\..\..\LeagueSharp\System\BehaviorSharp.dll</HintPath>
+    </Reference>
     <Reference Include="clipper_library">
-      <HintPath>D:\LeagueSharp\\System\clipper_library.dll</HintPath>
+      <HintPath>..\..\..\..\LeagueSharp\System\clipper_library.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp, Version=1.0.0.25, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\LeagueSharp\\System\LeagueSharp.dll</HintPath>
+      <HintPath>..\..\..\..\LeagueSharp\System\LeagueSharp.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.Common">
-      <HintPath>D:\LeagueSharp\\System\LeagueSharp.Common.dll</HintPath>
+      <HintPath>..\..\..\..\LeagueSharp\System\LeagueSharp.Common.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>D:\LeagueSharp\\System\SharpDX.dll</HintPath>
+      <HintPath>..\..\..\..\LeagueSharp\System\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Autoplay\Autoplay.cs" />
-    <Compile Include="Autoplay\MetaHandler.cs" />
-    <Compile Include="Autoplay\FileHandler.cs" />
-    <Compile Include="Autoplay\TreesAutoLevel.cs" />
+    <Compile Include="Autoplay\Load.cs" />
+    <Compile Include="Autoplay\Modes\Base.cs" />
+    <Compile Include="Autoplay\Modes\Carry.cs" />
+    <Compile Include="Autoplay\Modes\Support.cs" />
+    <Compile Include="Autoplay\Util\Data\Constants.cs" />
+    <Compile Include="Autoplay\Util\Data\Randoms.cs" />
+    <Compile Include="Autoplay\Util\Data\State.cs" />
+    <Compile Include="Autoplay\Util\Data\Variables.cs" />
+    <Compile Include="Autoplay\Util\Helpers\MetaHandler.cs" />
+    <Compile Include="Autoplay\Util\Helpers\FileHandler.cs" />
+    <Compile Include="Autoplay\Util\Data\AutoLevel.cs" />
+    <Compile Include="Autoplay\Util\Objects\Heroes.cs" />
+    <Compile Include="Autoplay\Util\Objects\Minions.cs" />
+    <Compile Include="Autoplay\Util\Objects\Turrets.cs" />
+    <Compile Include="Autoplay\Util\Orbwalker.cs" />
     <Compile Include="Plugins\Aatrox.cs" />
     <Compile Include="Plugins\Ahri.cs" />
     <Compile Include="Plugins\Akali.cs" />
@@ -125,6 +139,7 @@
     <Compile Include="Plugins\Vladimir.cs" />
     <Compile Include="Util\AntiGapcloser.cs" />
     <Compile Include="Util\AutoBushRevealer.cs" />
+    <Compile Include="Util\AutoPot.cs" />
     <Compile Include="Util\DamageBoostDatabase.cs" />
     <Compile Include="Evade\Collision.cs" />
     <Compile Include="Evade\Config.cs" />

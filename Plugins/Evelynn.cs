@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Evelynn : PluginBase
     {
@@ -48,7 +48,7 @@ namespace Support.Plugins
                 }
                 if (R.IsReady() && R.IsKillable(Target))
                 {
-                    R.Cast(Target, UsePackets);
+                    R.Cast(Target);
                 }
             }
 

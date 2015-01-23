@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Corki : PluginBase
     {
@@ -30,16 +30,16 @@ namespace Support.Plugins
             {
                 if (Q.CastCheck(Target, "ComboQ"))
                 {
-                    Q.Cast(Target, UsePackets);
+                    Q.Cast(Target);
                 }
                 if (E.CastCheck(Target, "ComboE"))
                 {
-                    E.Cast(Target, UsePackets);
+                    E.Cast(Target);
                 }
 
                 if (R.CastCheck(Target, "ComboR"))
                 {
-                    R.Cast(Target, UsePackets);
+                    R.Cast(Target);
                 }
             }
 
@@ -47,7 +47,7 @@ namespace Support.Plugins
             {
                 if (E.CastCheck(Target, "HarassE"))
                 {
-                    E.Cast(Target, UsePackets);
+                    E.Cast(Target);
                 }
             }
         }

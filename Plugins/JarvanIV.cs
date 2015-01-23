@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class JarvanIV : PluginBase
     {
@@ -60,19 +60,19 @@ namespace Support.Plugins
             {
                 if (t.IsValidTarget(Q.Range) && !haveUlti)
                     if (!t.HasBuff("JudicatorIntervention") && !t.HasBuff("Undying Rage"))
-                        R.CastIfHitchanceEquals(t, HitChance.Medium, UsePackets);
+                        R.CastIfHitchanceEquals(t, HitChance.Medium);
             }
             if ( E.IsReady() && t.IsValidTarget(Q.Range) && Q.IsReady())
             {
                 //xsalice Code
                 var vec = t.ServerPosition - Player.ServerPosition;
                 var castBehind = E.GetPrediction(t).CastPosition + Vector3.Normalize(vec) * 100;
-                E.Cast(castBehind, UsePackets);
+                E.Cast(castBehind);
             }
             if (t.IsValidTarget(Q.Range) && Q.IsReady() && _epos != default(Vector3) &&
                 t.IsValidTarget(200, true, _epos))
             {
-                Q.Cast(_epos, UsePackets);
+                Q.Cast(_epos);
             }
 
             if (W.IsReady())

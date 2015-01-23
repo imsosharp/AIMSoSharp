@@ -5,12 +5,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
 
     public class Lux : PluginBase
@@ -64,7 +64,7 @@ namespace Support.Plugins
                     blueBuffs.Where(
                         blueBuff => Player.GetSpellDamage(blueBuff, SpellSlot.R) > blueBuff.Health))
             {
-                R.Cast(blueBuff, UsePackets);
+                R.Cast(blueBuff);
             }
         }
 
@@ -78,7 +78,7 @@ namespace Support.Plugins
                     redBuffs.Where(
                         redBuff => Player.GetSpellDamage(redBuff, SpellSlot.R) > redBuff.Health))
             {
-                R.Cast(redBuff, UsePackets);
+                R.Cast(redBuff);
             }
         }
 
@@ -143,7 +143,7 @@ namespace Support.Plugins
                         .Where(x => !x.IsDead)
                         .Where(enemy => Player.GetDamageSpell(enemy, SpellSlot.R).CalculatedDamage > enemy.Health))
             {
-                R.Cast(enemy, UsePackets);
+                R.Cast(enemy);
                 return;
             }
         }

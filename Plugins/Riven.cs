@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Riven : PluginBase
     {
@@ -50,7 +50,7 @@ namespace Support.Plugins
             {
                 if (W.CastCheck(Target, "ComboW"))
                 {
-                    W.Cast(Target, UsePackets);
+                    W.Cast(Target);
                 }
                 if (RActive && Player.Distance(Target) < R.Range && R.IsKillable(Target))
                 {

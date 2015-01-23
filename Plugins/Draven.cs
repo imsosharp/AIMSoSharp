@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Draven : PluginBase
     {
@@ -72,7 +72,7 @@ namespace Support.Plugins
             {
                 if (E.CastCheck(Target, "ComboE"))
                 {
-                    E.Cast(Target, UsePackets);
+                    E.Cast(Target);
                 }
             }
 
@@ -94,7 +94,7 @@ namespace Support.Plugins
                     {
                         if (R.CastCheck(Target, "ComboR") && !blockR2)
                         {
-                            R.Cast(target, UsePackets);
+                            R.Cast(target);
                             blockR2 = true;
                             return;
                         }

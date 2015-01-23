@@ -21,12 +21,12 @@ using System;
 using System.Reflection;
 using LeagueSharp;
 using LeagueSharp.Common;
-using Support.Util;
+using AIM.Util;
 using Version = System.Version;
 
 #endregion
 
-namespace Support
+namespace AIM
 {
     internal class Program
     {
@@ -34,7 +34,7 @@ namespace Support
 
         private static void Main(string[] args)
         {
-            new Autoplay();
+            new Autoplay.Load();
             Version = Assembly.GetExecutingAssembly().GetName().Version;
 
             CustomEvents.Game.OnGameLoad += a =>

@@ -23,14 +23,14 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
 #endregion
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Masteryi : PluginBase
     {
@@ -54,7 +54,7 @@ namespace Support.Plugins
                 {
                     Qlogic();
                 }
-                if (R.IsReady() && Player.CountEnemysInRange(Q.Range) >= 2)
+                if (R.IsReady() && Player.CountEnemiesInRange(Q.Range) >= 2)
                 {
 
                     R.Cast();

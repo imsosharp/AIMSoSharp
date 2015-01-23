@@ -20,12 +20,12 @@
 using System;
 using LeagueSharp;
 using LeagueSharp.Common;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 
 #endregion
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Kayle : PluginBase
     {
@@ -43,7 +43,7 @@ namespace Support.Plugins
             {
                 if (Q.CastCheck(Target, "ComboQ"))
                 {
-                    Q.Cast(Target, UsePackets);
+                    Q.Cast(Target);
                 }
                 if (Player.Distance(Target) <= E.Range && Player.HealthPercentage() > 30 && E.CastCheck(Target, "ComboE"))
                 {

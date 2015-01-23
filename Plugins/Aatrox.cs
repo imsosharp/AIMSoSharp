@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Aatrox : PluginBase
     {
@@ -49,7 +49,7 @@ namespace Support.Plugins
 
                 if (R.CastCheck(Target, "ComboR"))
                 {
-                    R.Cast(Target, UsePackets);
+                    R.Cast(Target);
                 }
             }
 
@@ -65,7 +65,7 @@ namespace Support.Plugins
 
             if (Q.CastCheck(unit, "Interrupt.Q"))
             {
-                Q.Cast(unit, UsePackets);
+                Q.Cast(unit);
                 return;
             }
 

@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Ashe : PluginBase
     {
@@ -38,12 +38,12 @@ namespace Support.Plugins
                 }
                 if (W.CastCheck(Target, "ComboW"))
                 {
-                    W.Cast(Target, UsePackets);
+                    W.Cast(Target);
                 }
 
                 if (R.CastCheck(targetR, "ComboR") && R.IsKillable(targetR) )
                 {
-                    R.Cast(targetR, UsePackets);
+                    R.Cast(targetR);
                 }
             }
 
@@ -51,7 +51,7 @@ namespace Support.Plugins
             {
                 if (W.CastCheck(Target, "HarassW"))
                 {
-                    W.Cast(Target, UsePackets);
+                    W.Cast(Target);
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Support.Plugins
 
             if (R.CastCheck(unit, "Interrupt.R"))
             {
-                R.Cast(unit, UsePackets);
+                R.Cast(unit);
                 return;
             }
         

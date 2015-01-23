@@ -11,21 +11,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AIM.Autoplay.Util.Data;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace Support
+namespace AIM.Autoplay.Util.Helpers
 {
     internal class MetaHandler
     {
-
-        public static List<Obj_AI_Turret> AllTurrets;
-        public static List<Obj_AI_Turret> AllyTurrets;
-        public static List<Obj_AI_Turret> EnemyTurrets;
-        public static List<Obj_AI_Hero> AllHeroes;
-        public static List<Obj_AI_Hero> AllyHeroes;
-        public static List<Obj_AI_Hero> EnemyHeroes;
         public static string[] Supports = { "Alistar", "Annie", "Blitzcrank", "Braum", "Fiddlesticks", "Janna", "Karma", "Kayle", "Leona", "Lulu", "Morgana", "Nunu", "Nami", "Soraka", "Sona", "Taric", "Thresh", "Zilean", "Zyra" };
         public static string[] AP =
         {
@@ -49,29 +43,23 @@ namespace Support
         {
             var map = Utility.Map.GetMap();
 
-            if (map != null && (map.Type == Utility.Map.MapType.SummonersRift || map.Type == Utility.Map.MapType.TwistedTreeline))
+            
+            if (Objects.Heroes.Me.InFountain())
             {
-                if (Autoplay.Bot.InFountain() && Autoplay.NearestAllyTurret != null)
-                {
-                    Autoplay.NearestAllyTurret = null;
-                }
-            }
-            if (Autoplay.Bot.InFountain())
-            {
-                if (Autoplay.Bot.InFountain() && (Autoplay.Bot.Gold == 475 || Autoplay.Bot.Gold == 515)) //validates on SR untill 1:55 game time
+                if (Objects.Heroes.Me.InFountain() && (Objects.Heroes.Me.Gold == 475 || Objects.Heroes.Me.Gold == 515)) //validates on SR untill 1:55 game time
                     {
-                        int startingItem = Autoplay.Rand.Next(-6, 7);
+                        int startingItem = Randoms.Rand.Next(-6, 7);
                         if (startingItem <= 0)
                         {
-                            Autoplay.Bot.BuyItem(ItemId.Spellthiefs_Edge);
+                            Objects.Heroes.Me.BuyItem(ItemId.Spellthiefs_Edge);
                         }
                         if (startingItem > 0)
                         {
-                            Autoplay.Bot.BuyItem(ItemId.Ancient_Coin);
+                            Objects.Heroes.Me.BuyItem(ItemId.Ancient_Coin);
                         }
-                        Autoplay.Bot.BuyItem(ItemId.Warding_Totem_Trinket);
+                        Objects.Heroes.Me.BuyItem(ItemId.Warding_Totem_Trinket);
                     }
-                if (File.Exists(FileHandler._theFile) && (FileHandler.CustomShopList != null))
+                if (File.Exists(FileHandler.TheFile) && (FileHandler.CustomShopList != null))
                 {
                     foreach (var item in FileHandler.CustomShopList)
                     {
@@ -95,14 +83,14 @@ namespace Support
         }
         public static bool HasItem(ItemId item)
         {
-            return Items.HasItem((int)item, Autoplay.Bot);
+            return Items.HasItem((int)item, Objects.Heroes.Me);
         }
 
         public static void BuyItem(ItemId item)
         {
-            if (Environment.TickCount - LastShopAttempt > Autoplay.Rand.Next(0, 670))
+            if (Environment.TickCount - LastShopAttempt > Randoms.Rand.Next(0, 670))
             {
-                Autoplay.Bot.BuyItem(item);
+                Objects.Heroes.Me.BuyItem(item);
                 LastShopAttempt = Environment.TickCount;
             }
         }
@@ -113,62 +101,32 @@ namespace Support
             var map = Utility.Map.GetMap();
             if (map.Type == Utility.Map.MapType.SummonersRift)
             {
-                return SRShopList.OrderBy(item => Autoplay.Rand.Next()).ToArray();
+                return SRShopList.OrderBy(item => Randoms.Rand.Next()).ToArray();
             }
             if (map.Type == Utility.Map.MapType.TwistedTreeline)
             {
-                return TTShopList.OrderBy(item => Autoplay.Rand.Next()).ToArray();
+                return TTShopList.OrderBy(item => Randoms.Rand.Next()).ToArray();
             }
             if (map.Type == Utility.Map.MapType.HowlingAbyss)
             {
-                if (AP.Any(apchamp => Autoplay.Bot.BaseSkinName.ToLower() == apchamp.ToLower())) return ARAMShopListAP;
-                return ARAMShopListAD.OrderBy(item => Autoplay.Rand.Next()).ToArray();
+                if (AP.Any(apchamp => Objects.Heroes.Me.BaseSkinName.ToLower() == apchamp.ToLower())) return ARAMShopListAP;
+                return ARAMShopListAD.OrderBy(item => Randoms.Rand.Next()).ToArray();
             }
             if (map.Type == Utility.Map.MapType.CrystalScar)
             {
-                return CrystalScar.OrderBy(item => Autoplay.Rand.Next()).ToArray();
+                return CrystalScar.OrderBy(item => Randoms.Rand.Next()).ToArray();
             }
             return Other;
         }
 
         public static bool HasSixItems()
         {
-            return Autoplay.Bot.InventoryItems.ToList().Count >= 6;
+            return Objects.Heroes.Me.InventoryItems.ToList().Count >= 6;
         }
 
         public static bool HasSmite(Obj_AI_Hero hero)
         {
-            return hero.GetSpellSlot("SummonerSmite", true) != SpellSlot.Unknown; //obsolete, use the one below.
-            //return hero.GetSpellSlot("SummonerSmite") != SpellSlot.Unknown;
-        }
-
-        public static void LoadObjects()
-        {
-            //Heroes
-            AllHeroes = ObjectManager.Get<Obj_AI_Hero>().ToList();
-            AllyHeroes = (Utility.Map.GetMap().Type != Utility.Map.MapType.HowlingAbyss)
-                ? AllHeroes.FindAll(hero => hero.IsAlly && !IsSupport(hero) && !hero.IsMe && !HasSmite(hero)).ToList()
-                : AllHeroes.FindAll(hero => hero.IsAlly && !hero.IsMe).ToList();
-            EnemyHeroes = AllHeroes.FindAll(hero => !hero.IsAlly).ToList();
-        }
-
-        public static void UpdateObjects()
-        {
-
-            //Heroes
-            AllHeroes = AllHeroes.OrderBy(hero => hero.Distance(Autoplay.Bot)).ToList();
-            AllyHeroes = AllyHeroes.OrderBy(hero => hero.Distance(Autoplay.Bot)).ToList();
-            EnemyHeroes = EnemyHeroes.OrderBy(hero => hero.Distance(Autoplay.Bot)).ToList();
-
-         
-            //Turrets
-            AllTurrets = ObjectManager.Get<Obj_AI_Turret>().ToList();
-            AllyTurrets = AllTurrets.FindAll(turret => turret.IsAlly).ToList();
-            EnemyTurrets = AllTurrets.FindAll(turret => !turret.IsAlly).ToList();
-            AllTurrets = AllTurrets.OrderBy(turret => turret.Distance(Autoplay.Bot)).ToList();
-            AllyTurrets = AllyTurrets.OrderBy(turret => turret.Distance(Autoplay.Bot)).ToList();
-            EnemyTurrets = EnemyTurrets.OrderBy(turret => turret.Distance(Autoplay.Bot)).ToList();
-
+            return hero.GetSpellSlot("SummonerSmite") != SpellSlot.Unknown;
         }
 
         public static bool IsInBase(Obj_AI_Hero hero)
@@ -176,7 +134,7 @@ namespace Support
             var map = Utility.Map.GetMap();
             if (map != null && map.Type == Utility.Map.MapType.SummonersRift)
             {
-                var baseRange = 16000000; //4000^2
+                const int baseRange = 16000000; //4000^2
                 return hero.IsVisible &&
                        ObjectManager.Get<Obj_SpawnPoint>()
                            .Any(sp => sp.Team == hero.Team && hero.Distance(sp.Position, true) < baseRange);
@@ -189,17 +147,32 @@ namespace Support
             return Supports.Any(support => hero.BaseSkinName.ToLower() == support.ToLower());
         }
 
-        public static int NearbyAllyMinions(Obj_AI_Base x, int distance)
+        public static Obj_AI_Turret ClosestEnemyTurret(Vector3 point)
+        {
+            return ObjectManager.Get<Obj_AI_Turret>().OrderBy(t => t.Distance(point)).FirstOrDefault();
+        }
+
+        public static Obj_AI_Minion LeadMinion()
+        {
+            return ObjectManager.Get<Obj_AI_Minion>().FindAll(m => m.IsAlly).OrderBy(m => ClosestEnemyTurret(m.Position)).FirstOrDefault();
+        }
+
+        public static Obj_AI_Minion LeadMinion(Vector3 lane)
+        {
+            return ObjectManager.Get<Obj_AI_Minion>().FindAll(m => m.IsAlly).OrderBy(m => ClosestEnemyTurret(lane)).FirstOrDefault();
+        }
+
+        public static int CountNearbyAllyMinions(Obj_AI_Base x, int distance)
         {
             return ObjectManager.Get<Obj_AI_Minion>()
                     .Count(minion => minion.IsAlly && !minion.IsDead && minion.Distance(x) < distance);
         }
-        public static int NearbyAllies(Obj_AI_Base x, int distance)
+        public static int CountNearbyAllies(Obj_AI_Base x, int distance)
         {
             return ObjectManager.Get<Obj_AI_Hero>()
                     .Count(hero => hero.IsAlly && !hero.IsDead && !HasSmite(hero) && !hero.IsMe && hero.Distance(x) < distance);
         }
-        public static int NearbyAllies(Vector3 x, int distance)
+        public static int CountNearbyAllies(Vector3 x, int distance)
         {
             return ObjectManager.Get<Obj_AI_Hero>()
                     .Count(hero => hero.IsAlly && !hero.IsDead && !HasSmite(hero) && !hero.IsMe && hero.Distance(x) < distance);
@@ -207,10 +180,7 @@ namespace Support
 
         public static bool ShouldSupportTopLane
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
        

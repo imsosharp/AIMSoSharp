@@ -1,17 +1,15 @@
-﻿/* Borrowed from Trees:
+﻿/* Original at:
  * https://github.com/trees-software/LeagueSharp/blob/master/AutoLevelSpells/Program.cs 
  */
 #region
 
-using System;
 using LeagueSharp;
-using LeagueSharp.Common;
 
 #endregion
 
-namespace Support
+namespace AIM.Autoplay.Util.Data
 {
-    internal class TreesAutoLevel
+    public class AutoLevel
     {
         public static int[] GetSequence()
         {

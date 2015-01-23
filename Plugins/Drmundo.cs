@@ -5,12 +5,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Drmundo : PluginBase
     {
@@ -49,7 +49,7 @@ namespace Support.Plugins
 
             if (Q.CastCheck(target,"ComboQ"))
             {
-                Q.Cast(target, UsePackets);
+                Q.Cast(target);
             }
 
             if (target.IsValidTarget() && W.IsReady() && Player.Distance(target) <= W.Range && !ActiveW)
@@ -66,7 +66,7 @@ namespace Support.Plugins
                 E.Cast();
             }
 
-            int EnInRang = Utility.CountEnemysInRange(1000);
+            int EnInRang = Player.CountEnemiesInRange(1000);
 
             if (Player.HealthPercentage() < 30 && R.IsReady() && EnInRang >= 1 || EnInRang == 1)
             {

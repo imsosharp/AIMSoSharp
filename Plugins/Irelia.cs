@@ -4,12 +4,12 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using Support.Evade;
-using Support.Util;
-using ActiveGapcloser = Support.Util.ActiveGapcloser;
+using AIM.Evade;
+using AIM.Util;
+using ActiveGapcloser = AIM.Util.ActiveGapcloser;
 using SpellData = LeagueSharp.SpellData;
 
-namespace Support.Plugins
+namespace AIM.Plugins
 {
     public class Irelia : PluginBase
     {
@@ -47,17 +47,17 @@ namespace Support.Plugins
                 {
                     W.Cast();
                 }
-                Q.CastOnUnit(target, UsePackets);
+                Q.CastOnUnit(target);
             }
 
             if (E.IsReady())
             {
-                E.CastOnUnit(target, UsePackets);
+                E.CastOnUnit(target);
             }
 
             if (R.IsReady() && Player.Distance(target) < R.Range)
             {
-                R.Cast(target, UsePackets);
+                R.Cast(target);
             }
         }
 
