@@ -22,7 +22,6 @@ namespace AIM.Autoplay
         public static void OnWndProc(EventArgs args)
         {
             //Draw AIMLoading.jpg
-            Console.WriteLine("Loading");
         }
         public static void OnGameLoad(EventArgs args)
         {

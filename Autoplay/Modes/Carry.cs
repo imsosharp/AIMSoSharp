@@ -49,9 +49,9 @@ namespace AIM.Autoplay.Modes
 
         public override void OnGameUpdate(EventArgs args)
         {
-            if (ObjHeroes.AllHeroes != null) {ObjHeroes.SortHeroesListByDistance();}
-            if (ObjMinions.AllMinions != null) {ObjMinions.UpdateMinions();}
-            if (ObjTurrets.AllTurrets != null) {ObjTurrets.UpdateTurrets();}
+            //if (ObjHeroes.AllHeroes != null) {ObjHeroes.SortHeroesListByDistance();}
+            //if (ObjMinions.AllMinions != null) {ObjMinions.UpdateMinions();}
+            //if (ObjTurrets.AllTurrets != null) {ObjTurrets.UpdateTurrets();}
 
             ImpingAintEasy();
 
