@@ -50,30 +50,57 @@ namespace AIM.Autoplay.Modes
 
         public void ImpingAintEasy()
         {
-
-            Obj_AI_Minion leadingMinion = new Obj_AI_Minion();
-            BehaviorAction summonersRiftOrbwalking = new BehaviorAction(
+            new AutoLevel(Util.Data.AutoLevel.GetSequence());
+            MetaHandler.DoChecks(); //#TODO rewrite MetaHandler with BehaviorSharp
+            #region SetLeadingMinion
+            Obj_AI_Minion leadingMinion = null;
+            new BehaviorAction(
                 () =>
                 {
                     if (Utility.Map.GetMap().Type == Utility.Map.MapType.SummonersRift)
                     {
-                        leadingMinion = MetaHandler.LeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
-                        return BehaviorState.Success;
+                        if (leadingMinion == null || !leadingMinion.IsValid)
+                        {
+                            leadingMinion =
+                                MetaHandler.LeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
+                            return BehaviorState.Success;
+                        }
                     }
                     else
                     {
-                        leadingMinion = MetaHandler.LeadMinion();
-                        return BehaviorState.Success;
+                        if (leadingMinion == null || !leadingMinion.IsValid)
+                        {
+                            leadingMinion = MetaHandler.LeadMinion();
+                            return BehaviorState.Success;
+                        }
                     }
                     return BehaviorState.Failure;
-                });
-            summonersRiftOrbwalking.Tick();
+                }).Tick();
+            #endregion SetLeadingMinion
+            #region OrbwalkAtLeadingMinionLocation
+            new BehaviorAction(
+                () =>
+                {
+                    try
+                    {
+                        if (leadingMinion != null)
+                        {
+                            Vector2 orbwalkingPos = new Vector2();
+                            orbwalkingPos.X = leadingMinion.ServerPosition.X + ObjConstants.DefensiveAdditioner;
+                            orbwalkingPos.Y = leadingMinion.ServerPosition.Y + ObjConstants.DefensiveAdditioner;
+                            OrbW.ExecuteMixedMode(orbwalkingPos.To3D());
+                            return BehaviorState.Success;
+                        }
+                        return BehaviorState.Failure;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    return BehaviorState.Failure;
 
-
-            Vector2 orbwalkingPos = new Vector2();
-            orbwalkingPos.X = leadingMinion.ServerPosition.X + ObjConstants.DefensiveAdditioner;
-            orbwalkingPos.Y = leadingMinion.ServerPosition.Y + ObjConstants.DefensiveAdditioner;
-            OrbW.ExecuteMixedMode(orbwalkingPos.To3D());
+                }).Tick();
+            #endregion OrbwalkAtLeadingMinionLocation
         }
     }
 }
