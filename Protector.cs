@@ -142,7 +142,7 @@ namespace AIM
 
         private static void CreateMenu()
         {
-            Menu = new Menu("AutoSharp: Protector", "Protector", true);
+            Menu = new Menu("AIM: Protector", "Protector", true);
 
             // Marksman Potion Manager
             new PotionManager(Menu);

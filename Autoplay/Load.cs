@@ -25,8 +25,11 @@ namespace AIM.Autoplay
         }
         public static void OnGameLoad(EventArgs args)
         {
-            var newCarryInstance = new Modes.Carry();
-            newCarryInstance.Init();
+            if (Utility.Map.GetMap().Type == Utility.Map.MapType.HowlingAbyss)
+            {
+                var newCarryInstance = new Modes.Carry();
+                newCarryInstance.Init(false);
+            }
         }
     }
 }

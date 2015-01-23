@@ -12,16 +12,19 @@ using LeagueSharp.Common;
 using SharpDX;
 using AIM.Autoplay.Util.Helpers;
 using AIM.Autoplay.Util.Data;
+using BehaviorSharp.Components.Actions;
 using AutoLevel = LeagueSharp.Common.AutoLevel;
 
 namespace AIM.Autoplay.Modes
 {
     class Carry : Base
     {
-        public void Init()
+        private bool _playingSummonersRift;
+        public void Init(bool loadSummonersRiftLogic)
         {
             Game.OnGameUpdate += OnGameUpdate;
             CustomEvents.Game.OnGameLoad += OnGameLoad;
+            _playingSummonersRift = loadSummonersRiftLogic;
         }
 
         public override void OnGameLoad(EventArgs args)
@@ -49,7 +52,26 @@ namespace AIM.Autoplay.Modes
 
         public void ImpingAintEasy()
         {
-            Obj_AI_Minion leadingMinion = MetaHandler.LeadMinion();
+
+            Obj_AI_Minion leadingMinion = new Obj_AI_Minion();
+            BehaviorAction summonersRiftOrbwalking = new BehaviorAction(
+                () =>
+                {
+                    if (_playingSummonersRift)
+                    {
+                        leadingMinion = MetaHandler.LeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
+                        return BehaviorState.Success;
+                    }
+                    else
+                    {
+                        leadingMinion = MetaHandler.LeadMinion();
+                        return BehaviorState.Success;
+                    }
+                    return BehaviorState.Failure;
+                });
+            summonersRiftOrbwalking.Tick();
+
+
             Vector2 orbwalkingPos = new Vector2();
             orbwalkingPos.X = leadingMinion.ServerPosition.X + ObjConstants.DefensiveAdditioner;
             orbwalkingPos.Y = leadingMinion.ServerPosition.Y + ObjConstants.DefensiveAdditioner;
