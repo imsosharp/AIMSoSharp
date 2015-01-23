@@ -34,7 +34,7 @@ namespace AIM
 
         private static void Main(string[] args)
         {
-            new Autoplay.Load();
+            new Autoplay.Modes.Carry();
             Version = Assembly.GetExecutingAssembly().GetName().Version;
 
             CustomEvents.Game.OnGameLoad += a =>
