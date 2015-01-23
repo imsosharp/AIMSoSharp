@@ -77,15 +77,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Autoplay\Behaviors\Champions.cs" />
-    <Compile Include="Autoplay\Behaviors\Follow.cs" />
-    <Compile Include="Autoplay\Behaviors\Geometry.cs" />
-    <Compile Include="Autoplay\Behaviors\SummonersRift.cs" />
-    <Compile Include="Autoplay\Behaviors\Recalling.cs" />
-    <Compile Include="Autoplay\Behaviors\Program.cs" />
-    <Compile Include="Autoplay\Behaviors\Safety.cs" />
-    <Compile Include="Autoplay\Behaviors\Shop.cs" />
-    <Compile Include="Autoplay\Behaviors\Utils.cs" />
     <Compile Include="Autoplay\Load.cs" />
     <Compile Include="Autoplay\Modes\Base.cs" />
     <Compile Include="Autoplay\Modes\Carry.cs" />
@@ -189,7 +180,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Autoplay\Behaviors\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
