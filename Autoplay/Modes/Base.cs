@@ -23,7 +23,7 @@ namespace AIM.Autoplay.Modes
         public Turrets ObjTurrets { get; protected set; }
         public Autoplay.Util.Orbwalker OrbW { get; set; }
         public virtual void OnGameLoad(EventArgs args) { }
-        public virtual void OnGameUpdate(EventArgs args) { }
+        public virtual void OGU(EventArgs args) { }
 
         #region Menu
         public Menu Menu;

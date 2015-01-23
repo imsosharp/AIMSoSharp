@@ -16,14 +16,14 @@ namespace AIM.Autoplay
         public Load()
         {
             Game.OnWndProc += OnWndProc;
-            CustomEvents.Game.OnGameLoad += OnGameLoad;
+            CustomEvents.Game.OnGameLoad += OGU;
         }
 
         public static void OnWndProc(EventArgs args)
         {
             //Draw AIMLoading.jpg
         }
-        public static void OnGameLoad(EventArgs args)
+        public static void OGU(EventArgs args)
         {
             if (Utility.Map.GetMap().Type == Utility.Map.MapType.HowlingAbyss)
             {
