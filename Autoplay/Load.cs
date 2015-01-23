@@ -27,8 +27,7 @@ namespace AIM.Autoplay
         {
             if (Utility.Map.GetMap().Type == Utility.Map.MapType.HowlingAbyss)
             {
-                var newCarryInstance = new Modes.Carry();
-                newCarryInstance.Init();
+                new Modes.Carry().Init();
             }
         }
     }
