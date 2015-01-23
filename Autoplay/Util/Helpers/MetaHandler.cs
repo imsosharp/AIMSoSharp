@@ -149,7 +149,7 @@ namespace AIM.Autoplay.Util.Helpers
 
         public static Obj_AI_Turret ClosestEnemyTurret(Vector3 point)
         {
-            return ObjectManager.Get<Obj_AI_Turret>().OrderBy(t => t.Distance(point)).FirstOrDefault();
+            return ObjectManager.Get<Obj_AI_Turret>().FindAll(t => !t.IsAlly).OrderBy(t => t.Distance(point)).FirstOrDefault();
         }
 
         public static Obj_AI_Minion LeadMinion()
