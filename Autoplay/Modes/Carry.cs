@@ -19,7 +19,7 @@ namespace AIM.Autoplay.Modes
 {
     class Carry : Base
     {
-        public void Init()
+        public Carry()
         {
             //Game.OnGameUpdate += OnGameUpdate;
             CustomEvents.Game.OnGameLoad += OnGameLoad;
