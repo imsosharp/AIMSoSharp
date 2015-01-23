@@ -26,6 +26,7 @@ namespace AIM.Autoplay.Modes
 
         public override void OnGameLoad(EventArgs args)
         {
+            LoadMenu();
             new AutoLevel(Util.Data.AutoLevel.GetSequence());
             ObjConstants.AssignConstants();
             ObjHeroes.CreateHeroesList();

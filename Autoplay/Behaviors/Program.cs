@@ -110,7 +110,7 @@ namespace AIM.Autoplay.Behaviors
             SpellBehavior = ChampData.GetSequence();
             var AggroBehavior = new List<Sequence> { Follow.GetSequence() };
             AggroBehavior.AddRange(ChampData.GetSequence());
-            HealthBehavior = Health.GetSequence();
+            HealthBehavior = Recalling.GetSequence();
 
             MainBehavior = new Behavior(
                 new IndexSelector(

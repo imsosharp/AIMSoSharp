@@ -12,7 +12,7 @@ using LeagueSharp;
 
 namespace AIM.Autoplay.Behaviors
 {
-    internal class Health
+    internal class Recalling
     {
         private static readonly Obj_AI_Hero Player = ObjectManager.Player;
         private static Obj_AI_Hero FollowTarget;

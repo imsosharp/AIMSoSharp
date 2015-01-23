@@ -57,7 +57,7 @@ namespace AIM
                         Activator.CreateInstance(type);
                         return;
                     }
-                    Game.PrintChat("Something went wrong, tell sosharp.");
+                    return;
                 }
                 catch (Exception e)
                 {

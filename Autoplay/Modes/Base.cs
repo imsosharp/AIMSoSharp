@@ -24,5 +24,17 @@ namespace AIM.Autoplay.Modes
         public Autoplay.Util.Orbwalker OrbW { get; set; }
         public virtual void OnGameLoad(EventArgs args) { }
         public virtual void OnGameUpdate(EventArgs args) { }
+
+        #region Menu
+        public Menu Menu;
+        public void LoadMenu()
+        {
+            Menu = new Menu("AIM", "AIM", true);
+            Menu.AddItem(new MenuItem("Enabled", "Enabled").SetValue(new KeyBind(32, KeyBindType.Toggle)));
+            Menu.AddItem(new MenuItem("LowHealth", "Self Low Health %").SetValue(new Slider(20, 10, 50)));
+            Menu.AddToMainMenu();
+        }
+        #endregion Menu
+
     }
 }
