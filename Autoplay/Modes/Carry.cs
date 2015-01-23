@@ -19,12 +19,10 @@ namespace AIM.Autoplay.Modes
 {
     class Carry : Base
     {
-        private bool _playingSummonersRift;
-        public void Init(bool loadSummonersRiftLogic)
+        public void Init()
         {
             Game.OnGameUpdate += OnGameUpdate;
             CustomEvents.Game.OnGameLoad += OnGameLoad;
-            _playingSummonersRift = loadSummonersRiftLogic;
         }
 
         public override void OnGameLoad(EventArgs args)
@@ -57,7 +55,7 @@ namespace AIM.Autoplay.Modes
             BehaviorAction summonersRiftOrbwalking = new BehaviorAction(
                 () =>
                 {
-                    if (_playingSummonersRift)
+                    if (Utility.Map.GetMap().Type == Utility.Map.MapType.SummonersRift)
                     {
                         leadingMinion = MetaHandler.LeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
                         return BehaviorState.Success;
