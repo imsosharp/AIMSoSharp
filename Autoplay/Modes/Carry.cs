@@ -21,7 +21,7 @@ namespace AIM.Autoplay.Modes
     {
         public void Init()
         {
-            Game.OnGameUpdate += OnGameUpdate;
+            //Game.OnGameUpdate += OnGameUpdate;
             CustomEvents.Game.OnGameLoad += OnGameLoad;
         }
 
