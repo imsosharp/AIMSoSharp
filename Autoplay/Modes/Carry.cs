@@ -63,6 +63,7 @@ namespace AIM.Autoplay.Modes
                         {
                             leadingMinion =
                                 MetaHandler.LeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
+                            Game.PrintChat("Leading minion assigned");
                             return BehaviorState.Success;
                         }
                     }
