@@ -17,6 +17,14 @@ namespace AIM.Autoplay.Modes
 {
     public abstract class Base
     {
+        public Base() 
+        {
+            ObjConstants = new Constants();
+            ObjHeroes = new Heroes();
+            ObjMinions = new Minions();
+            ObjTurrets = new Turrets();
+            OrbW = new Util.Orbwalker();
+        }
         public virtual void OnGameLoad(EventArgs args) { }
         public virtual void OnGameUpdate(EventArgs args) { }
         public static Constants ObjConstants { get; protected set; }

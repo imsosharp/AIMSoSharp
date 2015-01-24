@@ -31,15 +31,9 @@ namespace AIM.Autoplay.Modes
             try
             {
                 Game.PrintChat("AIM Loaded!");
-                Console.WriteLine("FUGG :D");
                 new AutoLevel(Util.Data.AutoLevel.GetSequence());
                 ObjConstants.AssignConstants();
                 ObjHeroes.CreateHeroesList();
-                ObjConstants = new Constants();
-                ObjHeroes = new Heroes();
-                ObjMinions = new Minions();
-                ObjTurrets = new Turrets();
-                OrbW = new Autoplay.Util.Orbwalker();
             }
             catch (Exception e)
             {
@@ -49,9 +43,9 @@ namespace AIM.Autoplay.Modes
 
         public override void OnGameUpdate(EventArgs args)
         {
-            //if (ObjHeroes.AllHeroes != null) {ObjHeroes.SortHeroesListByDistance();}
-            //if (ObjMinions.AllMinions != null) {ObjMinions.UpdateMinions();}
-            //if (ObjTurrets.AllTurrets != null) {ObjTurrets.UpdateTurrets();}
+            if (ObjHeroes.AllHeroes != null) {ObjHeroes.SortHeroesListByDistance();}
+            if (ObjMinions.AllMinions != null) {ObjMinions.UpdateMinions();}
+            if (ObjTurrets.AllTurrets != null) {ObjTurrets.UpdateTurrets();}
 
             ImpingAintEasy();
 

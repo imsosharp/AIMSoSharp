@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using LeagueSharp;
@@ -13,6 +14,10 @@ namespace AIM.Autoplay.Util
 {
     public class Orbwalker
     {
+        public Orbwalker()
+        {
+
+        }
         public void ExecuteMixedMode(Vector3 pos)
         {
             var spellbook = ObjectManager.Player.Spellbook;
