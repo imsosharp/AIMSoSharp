@@ -7,6 +7,11 @@ namespace AIM.Autoplay.Util.Objects
 {
     public class Heroes
     {
+        public Heroes()
+        {
+            CreateHeroesList();
+            SortHeroesListByDistance();
+        }
         public static Obj_AI_Hero Me = ObjectManager.Player;
         public List<Obj_AI_Hero> AllHeroes;
         public List<Obj_AI_Hero> AllyHeroes;

@@ -57,20 +57,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BehaviorSharp">
-      <HintPath>..\..\..\..\LeagueSharp\System\BehaviorSharp.dll</HintPath>
+      <HintPath>C:\LeagueSharp\\System\BehaviorSharp.dll</HintPath>
     </Reference>
     <Reference Include="clipper_library">
-      <HintPath>..\..\..\..\LeagueSharp\System\clipper_library.dll</HintPath>
+      <HintPath>C:\LeagueSharp\\System\clipper_library.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp, Version=1.0.0.25, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LeagueSharp\System\LeagueSharp.dll</HintPath>
+      <HintPath>C:\LeagueSharp\\System\LeagueSharp.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.Common">
-      <HintPath>..\..\..\..\LeagueSharp\System\LeagueSharp.Common.dll</HintPath>
+      <HintPath>C:\LeagueSharp\\System\LeagueSharp.Common.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>..\..\..\..\LeagueSharp\System\SharpDX.dll</HintPath>
+      <HintPath>C:\LeagueSharp\\System\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

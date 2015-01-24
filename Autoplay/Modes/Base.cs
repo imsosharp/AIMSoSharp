@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AIM.Autoplay.Util;
 using AIM.Autoplay.Util.Data;
+using AIM.Autoplay.Util.Helpers;
 using AIM.Autoplay.Util.Objects;
 using LeagueSharp;
 using LeagueSharp.Common;
@@ -17,7 +18,7 @@ namespace AIM.Autoplay.Modes
 {
     public abstract class Base
     {
-        public Base() 
+        public Base()
         {
             ObjConstants = new Constants();
             ObjHeroes = new Heroes();
@@ -25,13 +26,15 @@ namespace AIM.Autoplay.Modes
             ObjTurrets = new Turrets();
             OrbW = new Util.Orbwalker();
         }
+
+        public Obj_AI_Minion LeadingMinion;
         public virtual void OnGameLoad(EventArgs args) { }
         public virtual void OnGameUpdate(EventArgs args) { }
         public static Constants ObjConstants { get; protected set; }
         public static Heroes ObjHeroes { get; protected set; }
         public static Minions ObjMinions { get; protected set; }
         public static  Turrets ObjTurrets { get; protected set; }
-        public Autoplay.Util.Orbwalker OrbW { get; set; }
+        public static Autoplay.Util.Orbwalker OrbW { get; set; }
 
         #region Menu
         public Menu Menu;
@@ -43,6 +46,25 @@ namespace AIM.Autoplay.Modes
             Menu.AddToMainMenu();
         }
         #endregion Menu
+
+        #region Minions
+
+        public void RefreshMinions()
+        {
+            ObjMinions.UpdateMinions();
+            if (Utility.Map.GetMap().Type == Utility.Map.MapType.SummonersRift)
+            {
+                LeadingMinion = ObjMinions.GetLeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
+                Game.PrintChat("Leading minion assigned");
+            }
+            else
+            {
+                LeadingMinion = ObjMinions.GetLeadMinion();
+                Game.PrintChat("Leading minion assigned");
+            }
+        }
+
+        #endregion Minions
 
     }
 }

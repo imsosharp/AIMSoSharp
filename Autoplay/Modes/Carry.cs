@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using AIM.Autoplay.Util.Data;
 using AIM.Autoplay.Util.Objects;
 using BehaviorSharp;
@@ -43,11 +44,11 @@ namespace AIM.Autoplay.Modes
 
         public override void OnGameUpdate(EventArgs args)
         {
-            if (ObjHeroes.AllHeroes != null) {ObjHeroes.SortHeroesListByDistance();}
-            if (ObjMinions.AllMinions != null) {ObjMinions.UpdateMinions();}
-            if (ObjTurrets.AllTurrets != null) {ObjTurrets.UpdateTurrets();}
+            ObjHeroes.SortHeroesListByDistance();
+            ObjTurrets.UpdateTurrets();
 
             ImpingAintEasy();
+            RefreshMinions();
 
         }
 
@@ -55,45 +56,17 @@ namespace AIM.Autoplay.Modes
         {
             new AutoLevel(Util.Data.AutoLevel.GetSequence());
             MetaHandler.DoChecks(); //#TODO rewrite MetaHandler with BehaviorSharp
-            #region SetLeadingMinion
-            Obj_AI_Minion leadingMinion = null;
-            new BehaviorAction(
-                () =>
-                {
-                    if (Utility.Map.GetMap().Type == Utility.Map.MapType.SummonersRift)
-                    {
-                        if (leadingMinion == null || !leadingMinion.IsValid)
-                        {
-                            leadingMinion =
-                                MetaHandler.LeadMinion(SummonersRift.BottomLane.Bottom_Zone.CenterOfPolygone().To3D());
-                            Game.PrintChat("Leading minion assigned");
-                            return BehaviorState.Success;
-                        }
-                    }
-                    else
-                    {
-                        if (leadingMinion == null || !leadingMinion.IsValid)
-                        {
-                            leadingMinion = MetaHandler.LeadMinion();
-
-                            Game.PrintChat("Leading minion assigned");
-                            return BehaviorState.Success;
-                        }
-                    }
-                    return BehaviorState.Failure;
-                }).Tick();
-            #endregion SetLeadingMinion
             #region OrbwalkAtLeadingMinionLocation
             new BehaviorAction(
                 () =>
                 {
                     try
                     {
-                        if (leadingMinion != null)
+                        if (LeadingMinion != null)
                         {
                             Vector2 orbwalkingPos = new Vector2();
-                            orbwalkingPos.X = leadingMinion.ServerPosition.X + ObjConstants.DefensiveAdditioner;
-                            orbwalkingPos.Y = leadingMinion.ServerPosition.Y + ObjConstants.DefensiveAdditioner;
+                            orbwalkingPos.X = LeadingMinion.ServerPosition.X + ObjConstants.DefensiveAdditioner;
+                            orbwalkingPos.Y = LeadingMinion.ServerPosition.Y + ObjConstants.DefensiveAdditioner;
                             OrbW.ExecuteMixedMode(orbwalkingPos.To3D());
                             return BehaviorState.Success;
                         }

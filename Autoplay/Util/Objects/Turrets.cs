@@ -8,6 +8,12 @@ namespace AIM.Autoplay.Util.Objects
     public class Turrets
     {
 
+        public Turrets()
+        {
+            UpdateTurrets();
+            SortTurretsByDistance();
+        }
+
         public List<Obj_AI_Turret> AllTurrets;
         public List<Obj_AI_Turret> AllyTurrets;
         public List<Obj_AI_Turret> EnemyTurrets;
