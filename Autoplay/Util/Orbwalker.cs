@@ -16,10 +16,11 @@ namespace AIM.Autoplay.Util
     {
         public Orbwalker()
         {
-
+            Game.PrintChat("AIM Init Successfull");
         }
         public void ExecuteMixedMode(Vector3 pos)
         {
+            Console.WriteLine("Mixed Mode");
             var spellbook = ObjectManager.Player.Spellbook;
             if (!spellbook.IsChanneling && !spellbook.IsAutoAttacking && !spellbook.IsCharging &&
                 !spellbook.IsCastingSpell)
