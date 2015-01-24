@@ -81,6 +81,8 @@ namespace AIM.Autoplay.Modes
                         if (leadingMinion == null || !leadingMinion.IsValid)
                         {
                             leadingMinion = MetaHandler.LeadMinion();
+
+                            Game.PrintChat("Leading minion assigned");
                             return BehaviorState.Success;
                         }
                     }
